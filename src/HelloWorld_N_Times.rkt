@@ -1,0 +1,21 @@
+#lang racket
+; Enter your code here. Read input from STDIN. Print output to STDOUT
+(define (read-list x)
+    (let ([e (read)])
+        (if (eof-object? e)
+            (reverse x)
+            (read-list (cons e x)))))
+(define (display-each x s)
+    (printf "~a~%" x)
+    (if (= s 1)
+        (void)
+        (display-each x (- s 1))))
+(define (display-list-each x s)
+    (let ([tail (cdr x)])
+        (display-each (car x) s)
+        (if
+            (pair? tail)
+            (display-list-each tail s)
+            (void))))
+(define inp (read-list null))
+(display-list-each (cdr inp) (car inp))
